@@ -163,15 +163,14 @@ function updateSliderRange() {
 
 valueSlider.addEventListener("input", () => {
   valueDisplay.textContent = valueSlider.value;
-  outputDiv.textContent = ""; // Clear output while adjusting
+  outputDiv.textContent = ""; 
 });
 
 fruitSelect.addEventListener("change", updateSliderRange);
 inputTypeSelect.addEventListener("change", updateSliderRange);
 
-updateSliderRange(); // Initialize on load
+updateSliderRange(); 
 
-// On Calculate: Find the day with closest value to slider input, then show all data for that day
 document.getElementById("calculate").addEventListener("click", () => {
   const fruit = fruitSelect.value;
   const inputType = inputTypeSelect.value;
@@ -183,7 +182,6 @@ document.getElementById("calculate").addEventListener("click", () => {
     return;
   }
 
-  // Find day with closest value for selected input type
   let closest = dataPoints[0];
   let closestDiff = Math.abs(getDataValue(closest, inputType) - inputVal);
 
@@ -194,17 +192,31 @@ document.getElementById("calculate").addEventListener("click", () => {
       closestDiff = diff;
     }
   }
+  const values = dataPoints.map(d => getDataValue(d, inputType));
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const midpoint = (min + max) / 2;
+  const position = getDataValue(closest, inputType);
+  let label = "";
+  if (inputType === "brix") {
+    label = position < midpoint ? "Sour" : "Sweet";
+  } else if (inputType === "pH") {
+    label = position < midpoint ? "Acidic" : "Alkaline";
+  } else if (inputType === "hardness") {
+    label = position < midpoint ? "Hard" : "Soft";
+  }
 
-  // Display results
+  // Display
   outputDiv.innerHTML = `
     <h3>Match Results</h3>
     <p><strong>Fruit:</strong> ${capitalize(fruit)}</p>
     <p><strong>Day:</strong> ${closest.day}</p>
-    <p><strong>Sweetness (Brix %):</strong> ${closest.brix}</p>
-    <p><strong>pH Level:</strong> ${closest.pH}</p>
-    <p><strong>Hardness:</strong> ${closest.firmness}</p>
+    <p><strong>Sweetness (Brix %):</strong> ${closest.brix} <em>${closest.brix < midpoint ? "Sour" : "Sweet"}</em></p>
+    <p><strong>pH Level:</strong> ${closest.pH} <em>${closest.pH < midpoint ? "Acidic" : "Alkaline"}</em></p>
+    <p><strong>Hardness:</strong> ${closest.firmness} <em>${closest.firmness < midpoint ? "Hard" : "Soft"}</em></p>
   `;
 });
+
 
 function getDataValue(dataPoint, inputType) {
   if (inputType === "brix") return dataPoint.brix;
