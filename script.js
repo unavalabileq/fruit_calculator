@@ -133,6 +133,10 @@ const valueSlider = document.getElementById("value");
 const valueDisplay = document.getElementById("value-display");
 const outputDiv = document.getElementById("output");
 
+const sliderLabelLeft = document.getElementById("slider-label-left");
+const sliderLabelRight = document.getElementById("slider-label-right");
+
+
 // Update slider range & display based on fruit & data type
 function updateSliderRange() {
   const fruit = fruitSelect.value;
@@ -158,8 +162,22 @@ function updateSliderRange() {
 
   valueSlider.value = ((min + max) / 2).toFixed(1);
   valueDisplay.textContent = valueSlider.value;
-  outputDiv.textContent = ""; // Clear output on slider change
+  outputDiv.textContent = "";
+
+  // Update slider end labels
+  if (inputType === "brix") {
+    sliderLabelLeft.textContent = "Sour";
+    sliderLabelRight.textContent = "Sweet";
+  } else if (inputType === "pH") {
+    sliderLabelLeft.textContent = "Acidic";
+    sliderLabelRight.textContent = "Alkaline";
+  } else if (inputType === "hardness") {
+    sliderLabelLeft.textContent = "Hard";
+    sliderLabelRight.textContent = "Soft";
+  }
 }
+
+
 
 valueSlider.addEventListener("input", () => {
   valueDisplay.textContent = valueSlider.value;
