@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fruit Thing</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Fruit Calc Thingy</h1>
+
+    <div class="input-section">
+      <label for="fruit">Select Fruit:</label>
+      <select id="fruit">
+        <option value="apple">Apple</option>
+        <option value="orange">Orange</option>
+        <option value="banana">Banana</option>
+        <option value="mango">Mango</option>
+        <option value="kiwi">Kiwi</option>
+        <option value="tangerine">Tangerine</option>
+        <option value="mandarin">Mandarin</option>
+        <option value="cherry">Cherry</option>
+        <option value="grape">Grape</option>
+        <option value="strawberry">Strawberry</option>
+        <option value="blueberry">Blueberry</option>
+        <option value="lemon">Lemon</option>
+        <option value="nectarine">Nectarine</option>
+        <option value="dragonfruit">Dragonfruit</option>
+        <option value="tomato">Tomato</option>
+        <option value="cherry_tomato">Cherry Tomato</option>
+        <option value="peach">Peach</option>
+        <option value="plum">Plum</option>
+        <option value="raspberry">Raspberry</option>
+        <option value="pear">Pear</option>
+        <option value="avocado">Avocado</option>
+      </select>
+
+      <label for="input-type">Input Data Type:</label>
+      <select id="input-type">
+        <option value="brix">Sweetness (Brix %)</option>
+        <option value="pH">pH Level</option>
+        <option value="hardness">Hardness</option>
+      </select>
+
+      <label for="value">Choose Value:</label>
+<input type="range" id="value" step="0.1" />
+<span id="value-display"></span>
+
+
+
+      <button id="calculate">Calculate</button>
+      <div class="extra-buttons">
+  <button onclick="location.href='us.html'">About Us</button>
+  <button onclick="location.href='mission.html'">Our Mission</button>
+</div>
+
+    </div>
+
+    <div id="output"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
